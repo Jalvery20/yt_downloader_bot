@@ -12,7 +12,6 @@ const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true });
 
 // Function to download a YouTube video and send it as a video file
 async function downloadVideo(chatId, url) {
-  console.log("object")
   try {
     // Get video information and thumbnail URL
     const videoInfo = await ytdl.getInfo(url);
@@ -20,8 +19,7 @@ async function downloadVideo(chatId, url) {
     const thumbnailUrl =
       videoInfo.videoDetails.thumbnails[
         videoInfo.videoDetails.thumbnails.length - 1
-      ].url;
-      console.log(title)
+      ].url
     // Send a message to show the download progress
     const message = await bot.sendMessage(
       chatId,
@@ -77,7 +75,7 @@ bot.on("message",async (msg) => {
   const chatId = msg.chat.id;
   const messageText = msg.text;
   
-  if (messageText.includes("youtube.com/watch?v=")) {
+  
 
     const url = messageText;
    
@@ -86,9 +84,7 @@ bot.on("message",async (msg) => {
     } else {
       bot.sendMessage(chatId, "Invalid YouTube URL.");
     }
-  } else {
-    bot.sendMessage(chatId, "Invalid YouTube URL.");
-  }
+  
 })
 
 bot.onText(/\/start/, (msg) => {
